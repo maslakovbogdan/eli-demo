@@ -156,18 +156,27 @@
       }
       .co .txt {
         position: absolute;
-        left: 7px; bottom: -1px;
+        left: -14px; bottom: 16px;
         width: max-content;
-        padding-bottom: 10px;
-        border-bottom: 1px solid rgba(255,255,255,0.85);
+        background: rgba(10, 10, 10, 0.55);
+        padding: 9px 14px;
+        border-radius: 4px;
         color: #ffffff;
         font-size: 20px;
         font-weight: 300;
-        line-height: 1.18;
+        line-height: 1.25;
         letter-spacing: 0.01em;
-        text-shadow: 0 1px 10px rgba(0,0,0,0.45);
       }
-      .co.co-r .txt { left: auto; right: 7px; }
+      .co::after {
+        content: '';
+        position: absolute;
+        left: -0.5px; bottom: 5px;
+        width: 1px; height: 11px;
+        background: rgba(255, 255, 255, 0.85);
+      }
+      .co.co-r .txt { left: auto; right: -14px; }
+      .co.co-b .txt { bottom: auto; top: 16px; }
+      .co.co-b::after { bottom: auto; top: 5px; }
       .pop {
         position: absolute;
         bottom: 96px;
@@ -312,13 +321,13 @@
         <img class="ph" src="./img/unified_real.jpg" alt="" />
         <div class="veil"></div>
         <div class="u-title">Единый стиль поселка</div>
-        <div class="co" data-tag="zabor" style="left: 470px; top: 512px;"><span class="dot"></span><div class="txt">Забор в едином<br />стиле поселка</div><span class="pop"><img src="./img/pop_zabor.jpg" alt="" /></span></div>
-        <div class="co" data-tag="domovlad" style="left: 755px; top: 548px;"><span class="dot"></span><div class="txt">Домовладение — это<br />продолжение участка</div><span class="pop"><img src="./img/pop_domovlad.jpg" alt="" /></span></div>
-        <div class="co" data-tag="materialy" style="left: 985px; top: 557px;"><span class="dot"></span><div class="txt">Природные<br />материалы</div><span class="pop"><img src="./img/pop_materialy.jpg" alt="" /></span></div>
-        <div class="co" data-tag="okna" style="left: 1050px; top: 480px;"><span class="dot"></span><div class="txt">Панорамные<br />окна в пол</div><span class="pop"><img src="./img/pop_okna.jpg" alt="" /></span></div>
+        <div class="co" data-tag="zabor" style="left: 452px; top: 508px;"><span class="dot"></span><div class="txt">Забор в едином<br />стиле поселка</div><span class="pop"><img src="./img/pop_zabor.jpg" alt="" /></span></div>
+        <div class="co" data-tag="domovlad" style="left: 740px; top: 560px;"><span class="dot"></span><div class="txt">Домовладение — это<br />продолжение участка</div><span class="pop"><img src="./img/pop_domovlad.jpg" alt="" /></span></div>
+        <div class="co co-b" data-tag="materialy" style="left: 940px; top: 558px;"><span class="dot"></span><div class="txt">Природные<br />материалы</div><span class="pop"><img src="./img/pop_materialy.jpg" alt="" /></span></div>
+        <div class="co" data-tag="okna" style="left: 1010px; top: 478px;"><span class="dot"></span><div class="txt">Панорамные<br />окна в пол</div><span class="pop"><img src="./img/pop_okna.jpg" alt="" /></span></div>
         <div class="co" data-tag="eli" style="left: 1270px; top: 280px;"><span class="dot"></span><div class="txt">Вековые ели<br />на каждом участке</div><span class="pop pop-b"><img src="./img/pop_eli.jpg" alt="" /></span></div>
         <div class="co" data-tag="cveta" style="left: 1615px; top: 468px;"><span class="dot"></span><div class="txt">Натуральные<br />цвета отделки</div><span class="pop"><img src="./img/pop_cveta.jpg" alt="" /></span></div>
-        <div class="co co-r" data-tag="osvesh" style="left: 1318px; top: 440px;"><span class="dot"></span><div class="txt">Стильное<br />освещение</div><span class="pop pop-r"><img src="./img/pop_osvesh.jpg" alt="" /></span></div>
+        <div class="co co-r" data-tag="osvesh" style="left: 1316px; top: 439px;"><span class="dot"></span><div class="txt">Стильное<br />освещение</div><span class="pop pop-r"><img src="./img/pop_osvesh.jpg" alt="" /></span></div>
         <div class="co" data-tag="akvat" style="left: 1420px; top: 640px;"><span class="dot"></span><div class="txt">Участки с личной<br />акваторией</div><span class="pop"><img src="./img/pop_akvat.jpg" alt="" /></span></div>
       </div>
     </section>
