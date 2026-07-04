@@ -145,7 +145,11 @@
       .co {
         position: absolute;
         cursor: pointer;
+        transition: opacity .2s ease;
       }
+      /* при раскрытом попапе прячем остальные метки, чтобы не торчали из-под фото */
+      .unified:has(.co:hover) .co:not(:hover),
+      .unified:has(.co.is-open) .co:not(.is-open) { opacity: 0; }
       .co .dot {
         position: absolute;
         left: -6px; top: -6px;
@@ -326,7 +330,7 @@
         <div class="co co-b" data-tag="materialy" style="left: 940px; top: 558px;"><span class="dot"></span><div class="txt">Природные<br />материалы</div><span class="pop"><img src="./img/pop_materialy.jpg" alt="" /></span></div>
         <div class="co" data-tag="okna" style="left: 1010px; top: 478px;"><span class="dot"></span><div class="txt">Панорамные<br />окна в пол</div><span class="pop"><img src="./img/pop_okna.jpg" alt="" /></span></div>
         <div class="co" data-tag="eli" style="left: 1270px; top: 280px;"><span class="dot"></span><div class="txt">Вековые ели<br />на каждом участке</div><span class="pop pop-b"><img src="./img/pop_eli.jpg" alt="" /></span></div>
-        <div class="co" data-tag="cveta" style="left: 1615px; top: 468px;"><span class="dot"></span><div class="txt">Натуральные<br />цвета отделки</div><span class="pop"><img src="./img/pop_cveta.jpg" alt="" /></span></div>
+        <div class="co" data-tag="cveta" style="left: 1615px; top: 468px;"><span class="dot"></span><div class="txt">Натуральные<br />цвета отделки</div><span class="pop pop-r"><img src="./img/pop_cveta.jpg" alt="" /></span></div>
         <div class="co co-r" data-tag="osvesh" style="left: 1316px; top: 439px;"><span class="dot"></span><div class="txt">Стильное<br />освещение</div><span class="pop pop-r"><img src="./img/pop_osvesh.jpg" alt="" /></span></div>
         <div class="co" data-tag="akvat" style="left: 1420px; top: 640px;"><span class="dot"></span><div class="txt">Участки с личной<br />акваторией</div><span class="pop"><img src="./img/pop_akvat.jpg" alt="" /></span></div>
       </div>
