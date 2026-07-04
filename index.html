@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ели Estate — редизайн блока (тестовое)</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Forum&family=Jost:wght@400;500;600&display=swap" rel="stylesheet" />
+    <style>
+      :root {
+        --ink: #000000;
+        --ink-2: #333333;
+        --gold-1: #ffe05a;
+        --gold-2: #ffd23a;
+        --card-dark: #0a0a0a;
+        --gap: 8px;
+      }
+      * { box-sizing: border-box; margin: 0; }
+      body {
+        background: #ffffff;
+        font-family: 'Jost', Arial, sans-serif;
+        color: var(--ink);
+        width: 1920px;
+      }
+      .container { width: 1390px; margin: 0 auto; }
+      section { padding: 70px 0; }
+
+      h2 {
+        font-family: 'Forum', serif;
+        font-weight: 400;
+        text-transform: uppercase;
+        font-size: 44px;
+        line-height: 1.22;
+        letter-spacing: 0.01em;
+        color: var(--ink);
+      }
+      .sub {
+        margin-top: 18px;
+        font-size: 20px;
+        line-height: 1.45;
+        color: var(--ink-2);
+        max-width: 760px;
+      }
+
+      /* ============ COLLAGE (Живите в эко-поселке) ============ */
+      .collage {
+        margin-top: 44px;
+        display: grid;
+        grid-template-columns: 691px 691px;
+        grid-template-rows: 354px 354px;
+        gap: var(--gap);
+      }
+      .tile {
+        position: relative;
+        overflow: hidden;
+        background: #111;
+      }
+      .tile img.ph {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+      .t-tall { grid-row: 1 / 3; }
+      .tile .cap {
+        position: absolute;
+        left: 0; right: 0; bottom: 0;
+        padding: 96px 28px 24px;
+        background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.62) 78%);
+        color: #ffffff;
+        font-size: 19px;
+        line-height: 1.4;
+        font-weight: 400;
+      }
+
+      /* Wright card — горизонтальная */
+      .wright {
+        background: var(--card-dark);
+        color: #ffffff;
+        padding: 40px 44px;
+        display: flex;
+        align-items: center;
+        gap: 36px;
+      }
+      .wright img.portrait {
+        width: 168px;
+        height: 210px;
+        object-fit: cover;
+        filter: grayscale(1);
+        border-radius: 4px;
+        flex-shrink: 0;
+      }
+      .wright .name {
+        font-family: 'Forum', serif;
+        font-size: 30px;
+        line-height: 1.15;
+      }
+      .wright .rule {
+        width: 44px; height: 1px;
+        background: #e7c766;
+        margin: 16px 0 14px;
+      }
+      .wright .role {
+        font-size: 17px;
+        line-height: 1.5;
+        color: #bdbdbd;
+        max-width: 330px;
+      }
+
+      /* ============ ЕДИНЫЙ СТИЛЬ ПОСЕЛКА (редизайн, вся ширина) ============ */
+      .unified {
+        position: relative;
+        width: 1920px;
+        height: 945px;
+        overflow: hidden;
+        background: #111;
+      }
+      .unified img.ph {
+        position: absolute; inset: 0;
+        width: 100%; height: 100%;
+        object-fit: cover; display: block;
+      }
+      .unified .veil {
+        position: absolute; inset: 0;
+        background:
+          radial-gradient(46% 34% at 18% 10%, rgba(0,0,0,0.52) 0%, rgba(0,0,0,0) 100%),
+          linear-gradient(180deg, rgba(0,0,0,0.22) 0%, rgba(0,0,0,0) 26%);
+      }
+      .unified .u-title {
+        position: absolute;
+        top: 72px;
+        left: 265px;
+        font-family: 'Forum', serif;
+        font-weight: 400;
+        text-transform: uppercase;
+        font-size: 44px;
+        letter-spacing: 0.01em;
+        color: #ffffff;
+        text-shadow: 0 2px 18px rgba(0,0,0,0.45);
+      }
+      .tag {
+        position: absolute;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        min-height: 64px;
+        background: rgba(10,10,10,0.55);
+        border-radius: 4px;
+        padding: 9px 14px;
+        color: #ffffff;
+        font-size: 15px;
+        line-height: 1.35;
+        box-sizing: border-box;
+      }
+      .pop {
+        position: absolute;
+        bottom: calc(100% + 14px);
+        left: 0;
+        width: 300px;
+        height: 200px;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 14px 34px rgba(0,0,0,0.4);
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(6px);
+        transition: opacity .25s ease, transform .25s ease;
+        pointer-events: none;
+      }
+      .pop img { width: 100%; height: 100%; object-fit: cover; display: block; }
+      .tag:hover .pop, .tag.is-open .pop {
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+      }
+      .pop.pop-r { left: auto; right: 0; }
+      @media (prefers-reduced-motion: reduce) {
+        .pop { transition: none; transform: none; }
+      }
+
+      /* ============ КАТАЛОГ (Выберите свой дом мечты) ============ */
+      .houses {
+        margin-top: 44px;
+        display: grid;
+        grid-template-columns: repeat(3, 458px);
+        gap: var(--gap);
+      }
+      .house {
+        position: relative;
+        height: 340px;
+        border-radius: 8px;
+        overflow: hidden;
+        background: #111;
+      }
+      .house img.ph {
+        position: absolute; inset: 0;
+        width: 100%; height: 100%;
+        object-fit: cover; display: block;
+      }
+      .house .shade {
+        position: absolute; left: 0; right: 0; bottom: 0; height: 62%;
+        background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.5) 40%, rgba(8,8,8,0.93) 68%, #080808 82%);
+      }
+      .house .meta {
+        position: absolute; left: 0; right: 0; bottom: 0;
+        padding: 22px 22px;
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+        gap: 18px;
+        color: #fff;
+      }
+      .house .title {
+        font-size: 24px;
+        font-weight: 500;
+        letter-spacing: 0.01em;
+        white-space: nowrap;
+      }
+      .badges {
+        display: grid;
+        grid-template-columns: auto auto;
+        gap: 8px;
+        justify-items: start;
+      }
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 5px 8px;
+        border-radius: 4px;
+        background: rgba(10, 10, 10, 0.55);
+        font-size: 13px;
+        white-space: nowrap;
+      }
+      .badge svg { flex-shrink: 0; opacity: .9; }
+
+      @media print {
+        @page { size: 1920px 2776px; margin: 0; }
+        html, body { width: 1920px; margin: 0; }
+        body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        section { break-inside: avoid; page-break-inside: avoid; }
+      }
+
+      .cta-row { margin-top: 44px; text-align: center; }
+      .btn {
+        display: inline-block;
+        font-family: 'Jost', sans-serif;
+        font-size: 14px;
+        font-weight: 600;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: #222222;
+        text-decoration: none;
+        padding: 19px 42px;
+        border-radius: 10px;
+        background: linear-gradient(180deg, var(--gold-1) 0%, var(--gold-2) 100%);
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ============ БЛОК: ЖИВИТЕ В ЭКО-ПОСЕЛКЕ ============ -->
+    <section>
+      <div class="container">
+        <h2>Живите в эко-поселке<br />с лучшей архитектурой в МО</h2>
+        <p class="sub">«Ели Estate» — Победитель федеральной премии «Поселок года» 2025</p>
+
+        <div class="collage">
+          <div class="tile t-tall">
+            <img class="ph" src="./img/tile_award.jpg" alt="" />
+            <div class="cap">Архитектура поселка — продолжение российской природы средней полосы — хвойный лес и вода</div>
+          </div>
+
+          <div class="tile">
+            <img class="ph" src="./img/tile_showroom.jpg" alt="" />
+            <div class="cap">Единый стиль и концепция основаны на идеях Фрэнка Ллойда Райта</div>
+          </div>
+
+          <div class="tile wright">
+            <img class="portrait" src="./img/wright.jpg" alt="" />
+            <div>
+              <div class="name">Фрэнк Ллойд Райт</div>
+              <div class="rule"></div>
+              <div class="role">выдающийся архитектор, создатель принципов органической архитектуры</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ БЛОК: ЕДИНЫЙ СТИЛЬ ПОСЕЛКА (фото из черновика, плашки поверх) ============ -->
+    <section style="padding: 20px 0;">
+      <div class="unified">
+        <img class="ph" src="./img/mid_existing.jpg" alt="" />
+        <div class="tag" data-tag="zabor" style="left: 164px; top: 537px; width: 190px; height: 82px;">Забор в едином стиле поселка<span class="pop"><img src="./img/pop_zabor.jpg" alt="" /></span></div>
+        <div class="tag" data-tag="domovlad" style="left: 487px; top: 511px; width: 258px; height: 85px;">Домовладение — это продолжение участка<span class="pop"><img src="./img/pop_domovlad.jpg" alt="" /></span></div>
+        <div class="tag" data-tag="materialy" style="left: 810px; top: 524px; width: 160px; height: 78px;">Природные материалы<span class="pop"><img src="./img/pop_materialy.jpg" alt="" /></span></div>
+        <div class="tag" data-tag="okna" style="left: 1162px; top: 460px; width: 185px; height: 84px;">Панорамные окна в пол<span class="pop"><img src="./img/pop_okna.jpg" alt="" /></span></div>
+        <div class="tag" data-tag="eli" style="left: 1166px; top: 219px; width: 211px; height: 78px;">Вековые ели на каждом участке<span class="pop"><img src="./img/pop_eli.jpg" alt="" /></span></div>
+        <div class="tag" data-tag="cveta" style="left: 1543px; top: 500px; width: 174px; height: 86px;">Натуральные цвета отделки<span class="pop"><img src="./img/pop_cveta.jpg" alt="" /></span></div>
+        <div class="tag" data-tag="osvesh" style="left: 1689px; top: 422px; width: 156px; height: 78px;">Стильное освещение<span class="pop pop-r"><img src="./img/pop_osvesh.jpg" alt="" /></span></div>
+        <div class="tag" data-tag="akvat" style="left: 1431px; top: 652px; width: 250px; height: 78px;">Участки с личной акваторией<span class="pop"><img src="./img/pop_akvat.jpg" alt="" /></span></div>
+      </div>
+    </section>
+
+    <!-- ============ БЛОК: ДОМ МЕЧТЫ ============ -->
+    <section>
+      <div class="container">
+        <h2>Выберите свой дом мечты</h2>
+        <p class="sub">149 готовых решений в авторской книге проектов “Ели Estate”</p>
+
+        <div class="houses">
+          <div class="house">
+            <img class="ph" src="./img/lermontov.jpg" alt="" />
+            <div class="shade"></div>
+            <div class="meta">
+              <div class="title">LERMONTOV</div>
+              <div class="badges">
+                <span class="badge"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="#fff" stroke-width="1.2"><rect x="1" y="1" width="12" height="12"/><path d="M1 5h12M5 5v8"/></svg>373 м²</span>
+                <span class="badge"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="#fff" stroke-width="1.2"><path d="M2 13V6l5-4 5 4v7z"/><path d="M2 9h10"/></svg>Деревянный</span>
+                <span class="badge"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="#fff" stroke-width="1.2"><path d="M1 11V8a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v3M1 11h12M3 6V4h8v2"/></svg>4 спальни</span>
+                <span class="badge"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="#fff" stroke-width="1.2"><path d="M2 12h10M2 12V8h4v4M6 8V4h4v4"/></svg>1 этаж</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="house">
+            <img class="ph" src="./img/izhora.jpg" alt="" />
+            <div class="shade"></div>
+            <div class="meta">
+              <div class="title">Большая Ижора</div>
+              <div class="badges">
+                <span class="badge"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="#fff" stroke-width="1.2"><rect x="1" y="1" width="12" height="12"/><path d="M1 5h12M5 5v8"/></svg>219 м²</span>
+                <span class="badge"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="#fff" stroke-width="1.2"><path d="M2 13V6l5-4 5 4v7z"/><path d="M2 9h10"/></svg>Каменный</span>
+                <span class="badge"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="#fff" stroke-width="1.2"><path d="M1 11V8a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v3M1 11h12M3 6V4h8v2"/></svg>4 спальни</span>
+                <span class="badge"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="#fff" stroke-width="1.2"><path d="M2 12h10M2 12V8h4v4M6 8V4h4v4"/></svg>2 этажа</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="house">
+            <img class="ph" src="./img/openvillage.jpg" alt="" />
+            <div class="shade"></div>
+            <div class="meta">
+              <div class="title">Опен Вилладж</div>
+              <div class="badges">
+                <span class="badge"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="#fff" stroke-width="1.2"><rect x="1" y="1" width="12" height="12"/><path d="M1 5h12M5 5v8"/></svg>200 м²</span>
+                <span class="badge"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="#fff" stroke-width="1.2"><path d="M2 13V6l5-4 5 4v7z"/><path d="M2 9h10"/></svg>Деревянный</span>
+                <span class="badge"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="#fff" stroke-width="1.2"><path d="M1 11V8a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v3M1 11h12M3 6V4h8v2"/></svg>3 спальни</span>
+                <span class="badge"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="#fff" stroke-width="1.2"><path d="M2 12h10M2 12V8h4v4M6 8V4h4v4"/></svg>2 этажа</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="cta-row">
+          <a class="btn" href="#">Скачать книгу проектов</a>
+        </div>
+      </div>
+    </section>
+    <script>
+      (function () {
+        var h = new URLSearchParams(location.search).get('hover');
+        if (h) {
+          var el = document.querySelector('[data-tag="' + h + '"]');
+          if (el) el.classList.add('is-open');
+        }
+      })();
+    </script>
+  </body>
+</html>
