@@ -141,30 +141,43 @@
         color: #ffffff;
         text-shadow: 0 2px 18px rgba(0,0,0,0.45);
       }
-      .tag {
+      /* Кнопка-метка как в черновике: точка + линия + белый текст (left/top = центр точки) */
+      .co {
         position: absolute;
         cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: flex-start;
-        min-height: 64px;
-        background: rgba(10,10,10,0.55);
-        border-radius: 4px;
-        padding: 9px 14px;
-        color: #ffffff;
-        font-size: 15px;
-        line-height: 1.35;
-        box-sizing: border-box;
       }
+      .co .dot {
+        position: absolute;
+        left: -6px; top: -6px;
+        width: 12px; height: 12px;
+        border-radius: 50%;
+        background: #ffffff;
+        box-shadow: 0 1px 6px rgba(0,0,0,0.35);
+      }
+      .co .txt {
+        position: absolute;
+        left: 7px; bottom: -1px;
+        width: max-content;
+        padding-bottom: 10px;
+        border-bottom: 1px solid rgba(255,255,255,0.85);
+        color: #ffffff;
+        font-size: 20px;
+        font-weight: 300;
+        line-height: 1.18;
+        letter-spacing: 0.01em;
+        text-shadow: 0 1px 10px rgba(0,0,0,0.45);
+      }
+      .co.co-r .txt { left: auto; right: 7px; }
       .pop {
         position: absolute;
-        bottom: calc(100% + 14px);
+        bottom: 96px;
         left: 0;
         width: 300px;
-        height: 200px;
-        border-radius: 8px;
+        height: 300px;
+        border-radius: 16px;
+        border: 3px solid #ffffff;
         overflow: hidden;
-        box-shadow: 0 14px 34px rgba(0,0,0,0.4);
+        box-shadow: 0 18px 44px rgba(0,0,0,0.45);
         opacity: 0;
         visibility: hidden;
         transform: translateY(6px);
@@ -172,12 +185,14 @@
         pointer-events: none;
       }
       .pop img { width: 100%; height: 100%; object-fit: cover; display: block; }
-      .tag:hover .pop, .tag.is-open .pop {
+      .co:hover .pop, .co.is-open .pop {
         opacity: 1;
         visibility: visible;
         transform: none;
       }
       .pop.pop-r { left: auto; right: 0; }
+      .pop.pop-b { bottom: auto; top: 16px; transform: translateY(-6px); }
+      .co:hover .pop.pop-b, .co.is-open .pop.pop-b { transform: none; }
       @media (prefers-reduced-motion: reduce) {
         .pop { transition: none; transform: none; }
       }
@@ -295,14 +310,14 @@
     <section style="padding: 20px 0;">
       <div class="unified">
         <img class="ph" src="./img/mid_existing.jpg" alt="" />
-        <div class="tag" data-tag="zabor" style="left: 164px; top: 537px; width: 190px; height: 82px;">Забор в едином стиле поселка<span class="pop"><img src="./img/pop_zabor.jpg" alt="" /></span></div>
-        <div class="tag" data-tag="domovlad" style="left: 487px; top: 511px; width: 258px; height: 85px;">Домовладение — это продолжение участка<span class="pop"><img src="./img/pop_domovlad.jpg" alt="" /></span></div>
-        <div class="tag" data-tag="materialy" style="left: 810px; top: 524px; width: 160px; height: 78px;">Природные материалы<span class="pop"><img src="./img/pop_materialy.jpg" alt="" /></span></div>
-        <div class="tag" data-tag="okna" style="left: 1162px; top: 460px; width: 185px; height: 84px;">Панорамные окна в пол<span class="pop"><img src="./img/pop_okna.jpg" alt="" /></span></div>
-        <div class="tag" data-tag="eli" style="left: 1166px; top: 219px; width: 211px; height: 78px;">Вековые ели на каждом участке<span class="pop"><img src="./img/pop_eli.jpg" alt="" /></span></div>
-        <div class="tag" data-tag="cveta" style="left: 1543px; top: 500px; width: 174px; height: 86px;">Натуральные цвета отделки<span class="pop"><img src="./img/pop_cveta.jpg" alt="" /></span></div>
-        <div class="tag" data-tag="osvesh" style="left: 1689px; top: 422px; width: 156px; height: 78px;">Стильное освещение<span class="pop pop-r"><img src="./img/pop_osvesh.jpg" alt="" /></span></div>
-        <div class="tag" data-tag="akvat" style="left: 1431px; top: 652px; width: 250px; height: 78px;">Участки с личной акваторией<span class="pop"><img src="./img/pop_akvat.jpg" alt="" /></span></div>
+        <div class="co" data-tag="zabor" style="left: 162px; top: 586px;"><span class="dot"></span><div class="txt">Забор в едином<br />стиле поселка</div><span class="pop"><img src="./img/pop_zabor.jpg" alt="" /></span></div>
+        <div class="co" data-tag="domovlad" style="left: 486px; top: 562px;"><span class="dot"></span><div class="txt">Домовладение — это<br />продолжение участка</div><span class="pop"><img src="./img/pop_domovlad.jpg" alt="" /></span></div>
+        <div class="co" data-tag="materialy" style="left: 810px; top: 584px;"><span class="dot"></span><div class="txt">Природные<br />материалы</div><span class="pop"><img src="./img/pop_materialy.jpg" alt="" /></span></div>
+        <div class="co" data-tag="okna" style="left: 1176px; top: 527px;"><span class="dot"></span><div class="txt">Панорамные<br />окна в пол</div><span class="pop"><img src="./img/pop_okna.jpg" alt="" /></span></div>
+        <div class="co" data-tag="eli" style="left: 1176px; top: 305px;"><span class="dot"></span><div class="txt">Вековые ели<br />на каждом участке</div><span class="pop pop-b"><img src="./img/pop_eli.jpg" alt="" /></span></div>
+        <div class="co" data-tag="cveta" style="left: 1523px; top: 572px;"><span class="dot"></span><div class="txt">Натуральные<br />цвета отделки</div><span class="pop"><img src="./img/pop_cveta.jpg" alt="" /></span></div>
+        <div class="co co-r" data-tag="osvesh" style="left: 1833px; top: 484px;"><span class="dot"></span><div class="txt">Стильное<br />освещение</div><span class="pop pop-r"><img src="./img/pop_osvesh.jpg" alt="" /></span></div>
+        <div class="co" data-tag="akvat" style="left: 1434px; top: 735px;"><span class="dot"></span><div class="txt">Участки с личной<br />акваторией</div><span class="pop"><img src="./img/pop_akvat.jpg" alt="" /></span></div>
       </div>
     </section>
 
